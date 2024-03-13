@@ -1,7 +1,9 @@
 package config
 
 import (
+	"github.com/ManyakRus/starter/log"
 	"os"
+	"strconv"
 )
 
 const FILENAME_XGML = "packages.graphml"
@@ -13,6 +15,7 @@ var Settings SettingsINI
 type SettingsINI struct {
 	DIRECTORY_SOURCE string
 	FILENAME_CSV     string
+	FOLDERS_LEVEL    int
 }
 
 // FillSettings загружает переменные окружения в структуру из переменных окружения
@@ -20,6 +23,14 @@ func FillSettings() {
 	Settings = SettingsINI{}
 	Settings.DIRECTORY_SOURCE = os.Getenv("DIRECTORY_SOURCE")
 	Settings.FILENAME_CSV = os.Getenv("FILENAME_CSV")
+
+	s := os.Getenv("FOLDERS_LEVEL")
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		log.Warn("Need fill FOLDERS_LEVEL, error: ", err)
+		i = 1
+	}
+	Settings.FOLDERS_LEVEL = i
 
 	if Settings.DIRECTORY_SOURCE == "" {
 		Settings.DIRECTORY_SOURCE = CurrentDirectory()
@@ -46,7 +57,7 @@ func CurrentDirectory() string {
 // FillFlags - заполняет параметры из командной строки
 func FillFlags() {
 	Args := os.Args[1:]
-	if len(Args) > 2 {
+	if len(Args) > 3 {
 		return
 	}
 
@@ -55,5 +66,14 @@ func FillFlags() {
 	}
 	if len(Args) > 1 {
 		Settings.FILENAME_CSV = Args[1]
+	}
+	if len(Args) > 2 {
+		s := Args[2]
+		i, err := strconv.Atoi(s)
+		if err != nil {
+			log.Warn("Need fill FOLDERS_LEVEL, error: ", err)
+			i = 1
+		}
+		Settings.FOLDERS_LEVEL = i
 	}
 }

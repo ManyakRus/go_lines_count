@@ -6,6 +6,7 @@ import (
 	"github.com/ManyakRus/go_lines_count/internal/packages_folder"
 	"github.com/ManyakRus/starter/folders"
 	"github.com/ManyakRus/starter/log"
+	"github.com/ManyakRus/starter/micro"
 	"io"
 	"os"
 	"regexp"
@@ -17,6 +18,14 @@ type CountLinesFunctions struct {
 	LinesCount int
 	FuncCount  int
 }
+
+type FolderLinesCountStruct struct {
+	Name  string
+	Level int
+	CountLinesFunctions
+}
+
+var FolderLinesCount = make([]FolderLinesCountStruct, 0)
 
 // FindLinesCount_Cache - кэш рассчитанных количество строк и количество функций
 var FindLinesCount_Cache = make(map[string]CountLinesFunctions)
@@ -31,27 +40,41 @@ func StartFillAll(FileName string) bool {
 		return Otvet
 	}
 
-	LinesCount, FuncCount, err := FillFolder(FolderRoot)
+	_, _, err := FillFolder(FolderRoot, 0)
 	if err != nil {
 		//log.Error("FillFolder() error: ", err)
 		return Otvet
 	}
 
-	log.Info("LinesCount: ", LinesCount, " FuncCount: ", FuncCount)
+	//log.Info("LinesCount: ", LinesCount, " FuncCount: ", FuncCount)
+	log.Infof("FolderLinesCount: %v", FolderLinesCount)
 
+	Otvet = true
 	return Otvet
 }
 
-func FillFolder(Folder *folders.Folder) (int, int, error) {
+func FillFolder(Folder *folders.Folder, level int) (int, int, error) {
 	var err error
 
 	LinesCount, FuncCount := FindLinesCount_folder1(Folder)
 
 	for _, folder1 := range Folder.Folders {
-		LinesCount1, FuncCount1, err := FillFolder(folder1)
+		level = level + 1
+		LinesCount1, FuncCount1, err := FillFolder(folder1, level)
 		if err != nil {
 			log.Error("FillFolder() error: ", err)
 		}
+
+		if level <= config.Settings.FOLDERS_LEVEL {
+			FolderLinesCount1 := FolderLinesCountStruct{}
+			FolderLinesCount1.Name = folder1.Name
+			FolderLinesCount1.Level = level
+			FolderLinesCount1.LinesCount = LinesCount1
+			FolderLinesCount1.FuncCount = FuncCount1
+
+			FolderLinesCount = append(FolderLinesCount, FolderLinesCount1)
+		}
+
 		LinesCount = LinesCount + LinesCount1
 		FuncCount = FuncCount + FuncCount1
 	}
@@ -68,8 +91,9 @@ func FindLinesCount_folder1(Folder1 *folders.Folder) (int, int) {
 	}
 
 	for _, file1 := range Folder1.Files {
-		Filename := file1.Name
-		Filename = strings.ToLower(Filename)
+		Filename1 := file1.Name
+		Filename1 = strings.ToLower(Filename1)
+		Filename := Folder1.FileName + micro.SeparatorFile() + Filename1
 		if strings.HasSuffix(Filename, ".go") == false {
 			continue
 		}
@@ -96,13 +120,13 @@ func FindLinesCount(FileName string) (int, int) {
 	//
 	bytes1, err := os.ReadFile(FileName)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Can not open file: ", FileName, " error: ", err)
 	}
 
 	reader := bytes.NewReader(bytes1)
 	LinesCount, err = LinesCount_reader(reader)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("LinesCount_reader error: ", err)
 	}
 
 	FuncCount = FindFuncCount(&bytes1)
