@@ -1,10 +1,19 @@
 package packages_folder
 
-import "github.com/ManyakRus/starter/folders"
+import (
+	"github.com/ManyakRus/go_lines_count/internal/config"
+	"github.com/ManyakRus/starter/folders"
+)
 
 func FindAllFolders_FromDir(dir string) *folders.Folder {
 
-	FolderRoot := folders.FindFoldersTree(dir, true, true, false, "vendor")
+	MassExclude := make([]string, 0)
+	MassExclude = append(MassExclude, "vendor")
+	MassExclude = append(MassExclude, ".git")
+	MassExclude = append(MassExclude, ".idea")
+	MassExclude = append(MassExclude, ".vscode")
+	MassExclude = append(MassExclude, config.Settings.EXCLUDE_FILDERS...)
+	FolderRoot := folders.FindFoldersTree(dir, true, true, false, MassExclude)
 
 	return FolderRoot
 }

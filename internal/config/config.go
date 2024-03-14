@@ -1,6 +1,7 @@
 package config
 
 import (
+	"encoding/json"
 	"github.com/ManyakRus/starter/log"
 	"os"
 	"strconv"
@@ -16,6 +17,7 @@ type SettingsINI struct {
 	DIRECTORY_SOURCE string
 	FILENAME_CSV     string
 	FOLDERS_LEVEL    int
+	EXCLUDE_FILDERS  []string
 }
 
 // FillSettings загружает переменные окружения в структуру из переменных окружения
@@ -39,6 +41,17 @@ func FillSettings() {
 
 	if Settings.FILENAME_CSV == "" {
 		Settings.FILENAME_CSV = FILENAME_XGML
+	}
+
+	//
+	sEXCLUDE_FILDERS := os.Getenv("EXCLUDE_FILDERS")
+	if sEXCLUDE_FILDERS != "" {
+		Mass_EXCLUDE_FOLDERS := make([]string, 0, 0)
+		err = json.Unmarshal([]byte(sEXCLUDE_FILDERS), &Mass_EXCLUDE_FOLDERS)
+		if err != nil {
+			log.Panic("Unmarshal json EXCLUDE_FILDERS, error: ", err)
+		}
+		Settings.EXCLUDE_FILDERS = Mass_EXCLUDE_FOLDERS
 	}
 
 	//
