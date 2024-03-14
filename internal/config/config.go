@@ -84,7 +84,12 @@ func FillFlags() {
 		Settings.DIRECTORY_SOURCE = Args[0]
 	}
 	if len(Args) > 1 {
-		Settings.FILENAME = Args[1]
+		s := Args[1]
+		if s == "-h" || s == "--help" {
+			println(constants.TEXT_HELP)
+			os.Exit(0)
+		}
+		Settings.FILENAME = s
 	}
 	if len(Args) > 2 {
 		s := Args[2]

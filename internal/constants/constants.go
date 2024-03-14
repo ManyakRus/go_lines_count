@@ -2,7 +2,10 @@ package constants
 
 const TEXT_HELP = `
 Run the go_lines_count file with parameters:
-go_lines_count <your repository directory> <filename.csv>
+go_lines_count <your repository directory> <filename.csv> <folders_level>
+
+example:
+./go_lines_count ./ ./lines_count.txt 2
 `
 
 // FolderNameLength - длина имени папки для выравнивания

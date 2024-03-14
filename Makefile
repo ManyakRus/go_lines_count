@@ -1,11 +1,13 @@
 SERVICENAME=go_lines_count
 SERVICEURL=gitlab.aescorp.ru/dsp_dev/claim/$(SERVICENAME)
+FILEAPP=./bin/$(SERVICENAME)
 
 ## build
 build:
 	clear
 	go fmt ./...
 	go build -o ./bin/$(SERVICENAME) ./cmd/$(SERVICENAME)/main.go
+	cp $(FILEAPP) $(GOPATH)/bin
 
 ## run
 run:

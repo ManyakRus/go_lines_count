@@ -20,7 +20,7 @@ func StartApp() {
 
 	StartAt := time.Now()
 	FileName := config.Settings.FILENAME
-	log.Info("directory: ", config.Settings.DIRECTORY_SOURCE)
+	log.Info("golang source code folder: ", config.Settings.DIRECTORY_SOURCE)
 	log.Info("file name: ", FileName)
 	ok := logic.StartFillAll(FileName)
 	if ok == false {
