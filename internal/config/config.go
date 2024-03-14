@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-const FILENAME_XGML = "packages.graphml"
+const FILENAME_DEFAULT = ""
 
 // Settings хранит все нужные переменные окружения
 var Settings SettingsINI
@@ -36,7 +36,7 @@ func FillSettings() {
 	i, err := strconv.Atoi(s)
 	if err != nil {
 		log.Warn("Need fill FOLDERS_LEVEL, error: ", err)
-		i = 1
+		i = constants.FOLDERS_LEVEL_DEFAULT
 	}
 	Settings.FOLDERS_LEVEL = i
 
@@ -46,7 +46,7 @@ func FillSettings() {
 	}
 
 	if Settings.FILENAME == "" {
-		Settings.FILENAME = FILENAME_XGML
+		Settings.FILENAME = FILENAME_DEFAULT
 	}
 
 	//
@@ -108,7 +108,8 @@ func LoadExcludeFolders() {
 	bytes, err := os.ReadFile(FileName)
 	if err != nil {
 		TextError := fmt.Sprint("ReadFile() error: ", err)
-		log.Panic(TextError)
+		log.Warn(TextError)
+		return
 	}
 
 	//json в map

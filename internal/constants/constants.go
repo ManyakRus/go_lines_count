@@ -10,3 +10,6 @@ const FolderNameLength = 10
 
 // EXCLUDE_FOLDERS_FILENAME - имя файла "exclude_folders.json"
 const EXCLUDE_FOLDERS_FILENAME = "exclude_folders.json"
+
+// FOLDERS_LEVEL_DEFAULT - уровень вложенности папок по умолчанию
+const FOLDERS_LEVEL_DEFAULT = 2

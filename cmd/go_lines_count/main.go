@@ -21,7 +21,7 @@ func StartApp() {
 	StartAt := time.Now()
 	FileName := config.Settings.FILENAME
 	log.Info("directory: ", config.Settings.DIRECTORY_SOURCE)
-	log.Info("file csv: ", FileName)
+	log.Info("file name: ", FileName)
 	ok := logic.StartFillAll(FileName)
 	if ok == false {
 		println(constants.TEXT_HELP)

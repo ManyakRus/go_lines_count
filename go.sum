@@ -2,6 +2,8 @@ github.com/ManyakRus/logrus v0.0.0-20231019115155-9e6fede0d792 h1:bxwxD0H3kSUAH3
 github.com/ManyakRus/logrus v0.0.0-20231019115155-9e6fede0d792/go.mod h1:OUyxCVbPW/2lC1e6cM7Am941SJiC88BhNnb24x2R3a8=
 github.com/ManyakRus/starter v1.0.11 h1:k/dVvW27DCWo1n1lDdFugyY9QkSi16+CJHcdv45Ogx8=
 github.com/ManyakRus/starter v1.0.11/go.mod h1:bIpOiyctURuRRuEJs0xCsBPvpoZFbpFEPX37wTvtuOI=
+github.com/ManyakRus/starter v1.0.15 h1:1ncBAYzu7Ob0Bwobg7tkbaLlBHH9IsoAz8M19A3kS54=
+github.com/ManyakRus/starter v1.0.15/go.mod h1:bIpOiyctURuRRuEJs0xCsBPvpoZFbpFEPX37wTvtuOI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

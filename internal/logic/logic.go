@@ -238,7 +238,7 @@ func (f *FolderLinesCountStruct) String() string {
 	sFolderNameLength := strconv.Itoa(FolderNameLength)
 
 	sName := fmt.Sprintf("%-"+sFolderNameLength+"s", "Name")
-	Otvet = Otvet + "\n" + sName + "\tLevel\tLines count\tFunctions count\n"
+	Otvet = Otvet + "" + sName + "\tLevel\tLines count\tFunctions count\n"
 	sName = fmt.Sprintf("%-"+sFolderNameLength+"s", f.Name)
 	Otvet = Otvet + sName + "\t" + strconv.Itoa(f.Level) + "\t" + strconv.Itoa(f.LinesCount) + "\t" + strconv.Itoa(f.FuncCount) + "\n"
 	Otvet = Otvet + StringMassFolderLinesCount(f.MassFolderLinesCountStruct)
