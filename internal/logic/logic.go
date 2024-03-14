@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"github.com/ManyakRus/go_lines_count/internal/config"
 	"github.com/ManyakRus/go_lines_count/internal/constants"
+	"github.com/ManyakRus/go_lines_count/internal/create_file_txt"
 	"github.com/ManyakRus/go_lines_count/internal/packages_folder"
 	"github.com/ManyakRus/starter/folders"
 	"github.com/ManyakRus/starter/log"
 	"github.com/ManyakRus/starter/micro"
 	"io"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -54,9 +56,10 @@ func StartFillAll(FileName string) bool {
 		return Otvet
 	}
 
-	//log.Info("LinesCount: ", LinesCount, " FuncCount: ", FuncCount)
-	StringFolderLinesCountRoot := FolderLinesCountRoot.String()
-	log.Info(StringFolderLinesCountRoot)
+	err = Save(&FolderLinesCountRoot)
+	if err != nil {
+		return Otvet
+	}
 
 	Otvet = true
 	return Otvet
@@ -226,6 +229,7 @@ func NewFolderLinesCountStruct() FolderLinesCountStruct {
 	return Otvet
 }
 
+// String - возвращает строку, красиво оформленную
 func (f *FolderLinesCountStruct) String() string {
 	Otvet := ""
 
@@ -234,7 +238,7 @@ func (f *FolderLinesCountStruct) String() string {
 	sFolderNameLength := strconv.Itoa(FolderNameLength)
 
 	sName := fmt.Sprintf("%-"+sFolderNameLength+"s", "Name")
-	Otvet = Otvet + "\n" + sName + "\tLevel\tLines count\t\tFunctions count\n"
+	Otvet = Otvet + "\n" + sName + "\tLevel\tLines count\tFunctions count\n"
 	sName = fmt.Sprintf("%-"+sFolderNameLength+"s", f.Name)
 	Otvet = Otvet + sName + "\t" + strconv.Itoa(f.Level) + "\t" + strconv.Itoa(f.LinesCount) + "\t" + strconv.Itoa(f.FuncCount) + "\n"
 	Otvet = Otvet + StringMassFolderLinesCount(f.MassFolderLinesCountStruct)
@@ -250,10 +254,6 @@ func StringMassFolderLinesCount(FolderLinesCount []*FolderLinesCountStruct) stri
 	sort.Slice(FolderLinesCount[:], func(i, j int) bool {
 		return FolderLinesCount[i].Name < FolderLinesCount[j].Name
 	})
-
-	//
-	//sFolderNameLength := strconv.Itoa(constants.FolderNameLength)
-
 	FolderNameLength := FindFolderNameLengthMax(FolderLinesCount, constants.FolderNameLength)
 	sFolderNameLength := strconv.Itoa(FolderNameLength)
 
@@ -279,4 +279,62 @@ func FindFolderNameLengthMax(FolderLinesCount []*FolderLinesCountStruct, LengthM
 		}
 	}
 	return Otvet
+}
+
+// CSV - возвращает строку в формате .csv
+func (f *FolderLinesCountStruct) CSV() string {
+	Otvet := ""
+
+	Otvet = Otvet + "\"Name\";Level;Lines count;Functions count\n"
+	Otvet = Otvet + `"` + f.Name + `"` + ";" + strconv.Itoa(f.Level) + ";" + strconv.Itoa(f.LinesCount) + ";" + strconv.Itoa(f.FuncCount) + "\n"
+	Otvet = Otvet + CSVMassFolderLinesCount(f.MassFolderLinesCountStruct)
+
+	return Otvet
+}
+
+// CSVMassFolderLinesCount - возвращает строку из FolderLinesCount.MassFolderLinesCountStruct
+func CSVMassFolderLinesCount(FolderLinesCount []*FolderLinesCountStruct) string {
+	Otvet := ""
+
+	//сортировка
+	sort.Slice(FolderLinesCount[:], func(i, j int) bool {
+		return FolderLinesCount[i].Name < FolderLinesCount[j].Name
+	})
+
+	//обход массива
+	for _, v := range FolderLinesCount {
+		Otvet = Otvet + `"` + v.Name + `"` + ";" + strconv.Itoa(v.Level) + ";" + strconv.Itoa(v.LinesCount) + ";" + strconv.Itoa(v.FuncCount) + "\n"
+		if len(v.MassFolderLinesCountStruct) > 0 {
+			Otvet = Otvet + StringMassFolderLinesCount(v.MassFolderLinesCountStruct)
+		}
+	}
+	return Otvet
+}
+
+func Save(FolderLinesCount *FolderLinesCountStruct) error {
+	var err error
+
+	Filename := config.Settings.FILENAME
+	Filename_low := strings.ToLower(Filename)
+	ext := filepath.Ext(Filename_low)
+
+	switch ext {
+	case ".csv":
+		{
+			s := FolderLinesCount.CSV()
+			err = create_file_txt.SaveToFile(s)
+		}
+	case ".txt":
+		{
+			s := FolderLinesCount.String()
+			err = create_file_txt.SaveToFile(s)
+		}
+	default:
+		{
+			s := FolderLinesCount.String()
+			print(s)
+		}
+	}
+
+	return err
 }

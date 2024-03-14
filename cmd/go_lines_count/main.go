@@ -19,7 +19,7 @@ func StartApp() {
 	config.FillFlags()
 
 	StartAt := time.Now()
-	FileName := config.Settings.FILENAME_CSV
+	FileName := config.Settings.FILENAME
 	log.Info("directory: ", config.Settings.DIRECTORY_SOURCE)
 	log.Info("file csv: ", FileName)
 	ok := logic.StartFillAll(FileName)

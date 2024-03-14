@@ -12,7 +12,7 @@ func FindAllFolders_FromDir(dir string) *folders.Folder {
 	MassExclude = append(MassExclude, ".git")
 	MassExclude = append(MassExclude, ".idea")
 	MassExclude = append(MassExclude, ".vscode")
-	MassExclude = append(MassExclude, config.Settings.EXCLUDE_FILDERS...)
+	MassExclude = append(MassExclude, config.Settings.EXCLUDE_FOLDERS...)
 	FolderRoot := folders.FindFoldersTree(dir, true, true, false, MassExclude)
 
 	return FolderRoot

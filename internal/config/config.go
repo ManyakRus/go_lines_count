@@ -2,7 +2,10 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/ManyakRus/go_lines_count/internal/constants"
 	"github.com/ManyakRus/starter/log"
+	"github.com/ManyakRus/starter/micro"
 	"os"
 	"strconv"
 )
@@ -15,16 +18,19 @@ var Settings SettingsINI
 // SettingsINI - структура для хранения всех нужных переменных окружения
 type SettingsINI struct {
 	DIRECTORY_SOURCE string
-	FILENAME_CSV     string
+	FILENAME         string
 	FOLDERS_LEVEL    int
-	EXCLUDE_FILDERS  []string
+	EXCLUDE_FOLDERS  []string
 }
 
 // FillSettings загружает переменные окружения в структуру из переменных окружения
 func FillSettings() {
+
 	Settings = SettingsINI{}
+	LoadExcludeFolders()
+
 	Settings.DIRECTORY_SOURCE = os.Getenv("DIRECTORY_SOURCE")
-	Settings.FILENAME_CSV = os.Getenv("FILENAME_CSV")
+	Settings.FILENAME = os.Getenv("FILENAME")
 
 	s := os.Getenv("FOLDERS_LEVEL")
 	i, err := strconv.Atoi(s)
@@ -39,20 +45,20 @@ func FillSettings() {
 		//log.Panicln("Need fill DIRECTORY_SOURCE ! in os.ENV ")
 	}
 
-	if Settings.FILENAME_CSV == "" {
-		Settings.FILENAME_CSV = FILENAME_XGML
+	if Settings.FILENAME == "" {
+		Settings.FILENAME = FILENAME_XGML
 	}
 
 	//
-	sEXCLUDE_FILDERS := os.Getenv("EXCLUDE_FILDERS")
-	if sEXCLUDE_FILDERS != "" {
-		Mass_EXCLUDE_FOLDERS := make([]string, 0, 0)
-		err = json.Unmarshal([]byte(sEXCLUDE_FILDERS), &Mass_EXCLUDE_FOLDERS)
-		if err != nil {
-			log.Panic("Unmarshal json EXCLUDE_FILDERS, error: ", err)
-		}
-		Settings.EXCLUDE_FILDERS = Mass_EXCLUDE_FOLDERS
-	}
+	//sEXCLUDE_FILDERS := os.Getenv("EXCLUDE_FOLDERS")
+	//if sEXCLUDE_FILDERS != "" {
+	//	Mass_EXCLUDE_FOLDERS := make([]string, 0, 0)
+	//	err = json.Unmarshal([]byte(sEXCLUDE_FILDERS), &Mass_EXCLUDE_FOLDERS)
+	//	if err != nil {
+	//		log.Panic("Unmarshal json EXCLUDE_FOLDERS, error: ", err)
+	//	}
+	//	Settings.EXCLUDE_FOLDERS = Mass_EXCLUDE_FOLDERS
+	//}
 
 	//
 }
@@ -78,7 +84,7 @@ func FillFlags() {
 		Settings.DIRECTORY_SOURCE = Args[0]
 	}
 	if len(Args) > 1 {
-		Settings.FILENAME_CSV = Args[1]
+		Settings.FILENAME = Args[1]
 	}
 	if len(Args) > 2 {
 		s := Args[2]
@@ -89,4 +95,27 @@ func FillFlags() {
 		}
 		Settings.FOLDERS_LEVEL = i
 	}
+}
+
+// LoadExcludeFolders - загружает маппинг ТипБД = ТипGolang, из файла .json
+func LoadExcludeFolders() {
+	dir := micro.ProgramDir()
+	FileName := dir + micro.SeparatorFile() + constants.EXCLUDE_FOLDERS_FILENAME
+
+	var err error
+
+	//чтение файла
+	bytes, err := os.ReadFile(FileName)
+	if err != nil {
+		TextError := fmt.Sprint("ReadFile() error: ", err)
+		log.Panic(TextError)
+	}
+
+	//json в map
+	//var MapServiceURL2 = make(map[string]string)
+	err = json.Unmarshal(bytes, &Settings.EXCLUDE_FOLDERS)
+	if err != nil {
+		log.Panic("Unmarshal() error: ", err)
+	}
+
 }

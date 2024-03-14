@@ -11,3 +11,4 @@
 .vscode
 /bin/go_lines_count
 
+/exclude_folders.json

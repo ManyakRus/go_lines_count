@@ -1,0 +1,3 @@
+DIRECTORY_SOURCE=
+FILENAME=./lines_count.csv
+FOLDERS_LEVEL=2
