@@ -5,6 +5,7 @@ import (
 	"github.com/ManyakRus/starter/folders"
 )
 
+// FindAllFolders_FromDir - возвращает дерево всех папок и файлов в директории
 func FindAllFolders_FromDir(dir string) *folders.Folder {
 
 	MassExclude := make([]string, 0)

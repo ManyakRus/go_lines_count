@@ -15,13 +15,9 @@ func SaveToFile(Text string) error {
 	//Filename := dir + micro.SeparatorFile() + Filename1
 
 	// сменим директорию на текущую
-	err = os.Chdir(config.CurrentDirectory())
-	if err != nil {
-		log.Error("Chdir error: ", err)
-	}
-	log.Info("Chdir: ", config.CurrentDirectory())
+	ChangeCurrentDirectory()
 
-	//
+	//запишем файл
 	file, err := os.Create(Filename)
 	_, err = file.Write([]byte(Text))
 	if err != nil {
@@ -32,4 +28,20 @@ func SaveToFile(Text string) error {
 	}
 
 	return err
+}
+
+// ChangeCurrentDirectory - устанавливает текущую директорию на директорию откуда запущена программа
+// вместо директории где находится программа
+func ChangeCurrentDirectory() {
+	var err error
+
+	// сменим директорию на текущую
+	dir := config.CurrentDirectory()
+	err = os.Chdir(dir)
+	if err != nil {
+		log.Error("Chdir error: ", err)
+	} else {
+		log.Info("Chdir: ", dir)
+	}
+
 }
