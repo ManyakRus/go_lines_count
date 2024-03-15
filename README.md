@@ -10,25 +10,28 @@ Displayed:
 
 A sample implementation can be found in the examples directory,
 example:
+```
 Name	                Level	Lines count	Functions count
 sanek           	1	423385	15884
 calendar	        2	674	22
 casebook_service	2	7476	46
+```
 
 Installation procedure:
 1. Compile this repository
-make build
+>make build
+>
 the go_lines_count file will appear in the "bin" folder
 
 3. Run the go_lines_count file with the following parameters:
 go_lines_count <DIRECTORY_SOURCE> <FILENAME> <FOLDERS_LEVEL>
 startup example:
-./go_lines_count ./ ./lines_count.txt 2
-
+>./go_lines_count ./ ./lines_count.txt 2
+>
 (or fill out the file bin/settings.txt)
 
 4. After launch, a new filled file will be created or text will be displayed in the console.
-
+```
 Settings:
 1. You can run it without any settings, there will be default settings.
 2. DIRECTORY_SOURCE
@@ -41,7 +44,7 @@ Calculation will begin from this folder, taking into account subfolders.
 4.FOLDERS_LEVEL
 - number of how many nesting levels to display,
 default =2
-
+```
 Source code in Golang language.
 Tested on Linux Ubuntu
 Readme from 03/14/2024
