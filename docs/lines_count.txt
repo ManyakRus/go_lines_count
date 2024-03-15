@@ -1,0 +1,7 @@
+Name      	Level	Lines count	Functions count
+.         	1	577	22
+bin       	2	0	0
+cmd       	2	33	2
+docs      	2	0	0
+examples  	2	0	0
+internal  	2	544	20

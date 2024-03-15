@@ -274,9 +274,8 @@ func FindFolderNameLengthMax(FolderLinesCount []*FolderLinesCountStruct, LengthM
 	for _, v := range FolderLinesCount {
 		Otvet1 := FindFolderNameLengthMax(v.MassFolderLinesCountStruct, LengthMax)
 		LenName := len(v.Name)
-		if LenName > Otvet1 && LenName > Otvet {
-			Otvet = LenName
-		}
+		Otvet = micro.Max(Otvet, Otvet1)
+		Otvet = micro.Max(Otvet, LenName)
 	}
 	return Otvet
 }

@@ -50,7 +50,10 @@ help:
 
 graph:
 	clear
-	image_packages ./ docs/packages.graphml
+	image_packages ./ ./docs/packages.graphml
 conn:
 	clear
-	image_connections ./cmd docs/connections.graphml $(SERVICENAME)
+	image_connections ./cmd/go_lines_count ./docs/connections.graphml $(SERVICENAME)
+lines:
+	clear
+	go_lines_count ./ ./docs/lines_count.txt 10
