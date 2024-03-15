@@ -1,5 +1,5 @@
 "Name";Level;Lines count;Functions count
-"!sanek";1;423385;15884
+"!sanek";1;423399;15884
 "calendar";2;674;22
 "casebook_service";2;7476;46
 "contract_checker_service";2;537;11
@@ -8,6 +8,6 @@
 "debtors_list";2;2272;35
 "monitor_service";2;3025;22
 "stack_exchange_postgres";2;16131;390
-"starter";2;10442;538
+"starter";2;10456;538
 "sync_service";2;356752;13915
 "telegram_loki";2;639;22

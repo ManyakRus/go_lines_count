@@ -241,20 +241,20 @@ func (f *FolderLinesCountStruct) String() string {
 	Otvet = Otvet + "" + sName + "\tLevel\tLines count\tFunctions count\n"
 	sName = fmt.Sprintf("%-"+sFolderNameLength+"s", f.Name)
 	Otvet = Otvet + sName + "\t" + strconv.Itoa(f.Level) + "\t" + strconv.Itoa(f.LinesCount) + "\t" + strconv.Itoa(f.FuncCount) + "\n"
-	Otvet = Otvet + StringMassFolderLinesCount(f.MassFolderLinesCountStruct)
+	Otvet = Otvet + StringMassFolderLinesCount(f.MassFolderLinesCountStruct, FolderNameLength)
 
 	return Otvet
 }
 
 // StringMassFolderLinesCount - возвращает строку из FolderLinesCount.MassFolderLinesCountStruct
-func StringMassFolderLinesCount(FolderLinesCount []*FolderLinesCountStruct) string {
+func StringMassFolderLinesCount(FolderLinesCount []*FolderLinesCountStruct, FolderNameLength int) string {
 	Otvet := ""
 
 	//сортировка
 	sort.Slice(FolderLinesCount[:], func(i, j int) bool {
 		return FolderLinesCount[i].Name < FolderLinesCount[j].Name
 	})
-	FolderNameLength := FindFolderNameLengthMax(FolderLinesCount, constants.FolderNameLength)
+	//FolderNameLength := FindFolderNameLengthMax(FolderLinesCount, constants.FolderNameLength)
 	sFolderNameLength := strconv.Itoa(FolderNameLength)
 
 	//обход массива
@@ -262,7 +262,7 @@ func StringMassFolderLinesCount(FolderLinesCount []*FolderLinesCountStruct) stri
 		sName := fmt.Sprintf("%-"+sFolderNameLength+"s", v.Name)
 		Otvet = Otvet + sName + "\t" + strconv.Itoa(v.Level) + "\t" + strconv.Itoa(v.LinesCount) + "\t" + strconv.Itoa(v.FuncCount) + "\n"
 		if len(v.MassFolderLinesCountStruct) > 0 {
-			Otvet = Otvet + StringMassFolderLinesCount(v.MassFolderLinesCountStruct)
+			Otvet = Otvet + StringMassFolderLinesCount(v.MassFolderLinesCountStruct, FolderNameLength)
 		}
 	}
 	return Otvet
@@ -305,12 +305,13 @@ func CSVMassFolderLinesCount(FolderLinesCount []*FolderLinesCountStruct) string 
 	for _, v := range FolderLinesCount {
 		Otvet = Otvet + `"` + v.Name + `"` + ";" + strconv.Itoa(v.Level) + ";" + strconv.Itoa(v.LinesCount) + ";" + strconv.Itoa(v.FuncCount) + "\n"
 		if len(v.MassFolderLinesCountStruct) > 0 {
-			Otvet = Otvet + StringMassFolderLinesCount(v.MassFolderLinesCountStruct)
+			Otvet = Otvet + CSVMassFolderLinesCount(v.MassFolderLinesCountStruct)
 		}
 	}
 	return Otvet
 }
 
+// Save - сохраняет в файл
 func Save(FolderLinesCount *FolderLinesCountStruct) error {
 	var err error
 
