@@ -11,11 +11,26 @@ Displayed:
 A sample implementation can be found in the examples directory,
 example:
 ```
-Name	                Level	Lines count	Functions count
-sanek           	1	423385	15884
-calendar	        2	674	22
-casebook_service	2	7476	46
+Name                     	Level	Lines count	Functions count
+.                        	1	491597	18220
+calendar                 	2	684	22
+casebook_service         	2	7510	47
+contract_checker_service 	2	825	13
+crud_generator           	2	16170	549
+debezium_adapter_postgres	2	11057	381
+debtors_list             	2	2441	35
+go_lines_count           	2	589	23
+image_connections        	2	1779	52
+image_database           	2	1836	45
+image_packages           	2	2379	72
+monitor_service          	2	2644	23
+stack_exchange_postgres  	2	16591	397
+starter                  	2	11240	578
+sync_service             	2	415213	15961
+telegram_loki            	2	639	22
 ```
+I wrote 492 thousand lines of code in 2 years, 
+including 405 thousand lines with a code generator and 87 thousand lines of code manually.
 
 Installation procedure:
 1. Compile this repository

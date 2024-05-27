@@ -1,7 +1,13 @@
-Name      	Level	Lines count	Functions count
-.         	1	577	22
-bin       	2	0	0
-cmd       	2	33	2
-docs      	2	0	0
-examples  	2	0	0
-internal  	2	544	20
+Name           	Level	Lines count	Functions count
+.              	1	589	23
+bin            	2	0	0
+cmd            	2	33	2
+go_lines_count 	3	33	2
+docs           	2	0	0
+examples       	2	0	0
+internal       	2	556	21
+config         	3	128	4
+constants      	3	18	0
+create_file_txt	3	48	2
+logic          	3	341	14
+packages_folder	3	21	1

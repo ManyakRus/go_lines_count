@@ -1,5 +1,7 @@
 SERVICENAME=go_lines_count
 SERVICEURL=gitlab.aescorp.ru/dsp_dev/claim/$(SERVICENAME)
+
+FILEMAIN=./cmd/$(SERVICENAME)/main.go
 FILEAPP=./bin/$(SERVICENAME)
 
 ## build
@@ -57,3 +59,5 @@ conn:
 lines:
 	clear
 	go_lines_count ./ ./docs/lines_count.txt 10
+licenses:
+	golicense -out-xlsx=./docs/licenses.xlsx $(FILEAPP)

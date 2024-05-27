@@ -10,10 +10,29 @@
 
 Образец выполнения можно найти в каталоге examples,
 пример:
+```
 Name                     	Level	Lines count	Functions count
-sanek                   	1	423385	15884
-calendar                 	2	674	22
-casebook_service         	2	7476	46
+.                        	1	491597	18220
+calendar                 	2	684	22
+casebook_service         	2	7510	47
+contract_checker_service 	2	825	13
+copy                     	2	0	0
+crud_generator           	2	16170	549
+debezium_adapter_postgres	2	11057	381
+debtors_list             	2	2441	35
+go_lines_count           	2	589	23
+image_connections        	2	1779	52
+image_database           	2	1836	45
+image_packages           	2	2379	72
+monitor_service          	2	2644	23
+stack_exchange_postgres  	2	16591	397
+starter                  	2	11240	578
+sync_service             	2	415213	15961
+telegram_loki            	2	639	22
+```
+
+Я написал 492 тысяч строк кода за 2 года, 
+в том числе 405 тысяч строк с кодогенератором и 87 тысяч строк кода лично вручную.
 
 Порядок установки:
 1. Скомпилировать этот репозиторий
