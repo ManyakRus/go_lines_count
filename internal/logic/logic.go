@@ -115,7 +115,7 @@ func FindLinesCount_folder1(Folder1 *folders.Folder) (int, int) {
 
 	for _, file1 := range Folder1.Files {
 		Filename1 := file1.Name
-		Filename1 = strings.ToLower(Filename1)
+		//Filename1 = strings.ToLower(Filename1)
 		Filename := Folder1.FileName + micro.SeparatorFile() + Filename1
 		if strings.HasSuffix(Filename, ".go") == false {
 			continue

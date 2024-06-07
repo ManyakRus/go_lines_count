@@ -12,3 +12,4 @@
 /bin/go_lines_count
 
 /exclude_folders.json
+/lines_count.txt
