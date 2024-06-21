@@ -12,25 +12,27 @@ A sample implementation can be found in the examples directory,
 example:
 ```
 Name                     	Level	Lines count	Functions count
-.                        	1	491597	18220
+.                        	1	505817	18692
 calendar                 	2	684	22
 casebook_service         	2	7510	47
-contract_checker_service 	2	825	13
-crud_generator           	2	16170	549
-debezium_adapter_postgres	2	11057	381
-debtors_list             	2	2441	35
+contract_checker_service 	2	831	13
+copy                     	2	0	0
+crud_generator           	2	17206	588
+debezium_adapter_postgres	2	11060	381
+debtors_list             	2	2407	35
 go_lines_count           	2	589	23
 image_connections        	2	1779	52
 image_database           	2	1836	45
 image_packages           	2	2379	72
-monitor_service          	2	2644	23
-stack_exchange_postgres  	2	16591	397
-starter                  	2	11240	578
-sync_service             	2	415213	15961
+monitor_service          	2	2670	23
+stack_exchange_postgres  	2	16720	397
+starter                  	2	11718	598
+sync_service             	2	427362	16362
 telegram_loki            	2	639	22
+whatsapp_chatgpt         	2	427	12
 ```
-I wrote 492 thousand lines of code in 2 years, 
-including 405 thousand lines with a code generator and 87 thousand lines of code manually.
+I wrote 505 thousand lines of code in 2 years, 
+including 415 thousand lines with a code generator and 80 thousand lines of code manually.
 
 Installation procedure:
 1. Compile this repository
