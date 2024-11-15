@@ -11,6 +11,7 @@ Displayed:
 A sample implementation can be found in the examples directory,
 example:
 ```
+21.06.2024:
 Name                     	Level	Lines count	Functions count
 .                        	1	505817	18692
 calendar                 	2	684	22
@@ -30,9 +31,32 @@ starter                  	2	11718	598
 sync_service             	2	427362	16362
 telegram_loki            	2	639	22
 whatsapp_chatgpt         	2	427	12
+
+13.11.2024:
+Name                     	Level	Lines count	Functions count
+.                        	1	624509	22888
+calendar                 	2	684	22
+casebook_service         	2	7546	48
+contract_checker_service 	2	902	15
+copy                     	2	0	0
+crud_generator           	2	27128	776
+ddl_from_protobuf        	2	1557	47
+debezium_adapter_postgres	2	11643	321
+debtors_list             	2	2456	36
+go_lines_count           	2	612	24
+image_connections        	2	1802	53
+image_database           	2	1864	46
+image_packages           	2	2402	73
+monitor_service          	2	2765	24
+stack_exchange_postgres  	2	18550	425
+starter                  	2	14362	725
+sync_service             	2	528362	20198
+telegram_loki            	2	1449	43
+whatsapp_chatgpt         	2	425	12
 ```
-I wrote 505 thousand lines of code in 2 years, 
-including 415 thousand lines with a code generator and 80 thousand lines of code manually.
+
+I wrote 610 thousand lines of code in 2 years, 
+including 510 thousand lines with a code generator, and 100 thousand lines of code manually.
 
 Installation procedure:
 1. Compile this repository
