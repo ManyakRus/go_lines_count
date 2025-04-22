@@ -53,6 +53,30 @@ starter                  	2	14362	725
 sync_service             	2	528362	20198
 telegram_loki            	2	1449	43
 whatsapp_chatgpt         	2	425	12
+
+22.04.2025:
+Name                     	Level	Lines count	Functions count
+.                        	1	1491464	57821
+calendar                 	2	710	22
+casebook_service         	2	7605	50
+contract_checker_service 	2	1256	20
+crud_generator           	2	27988	793
+crud_test                	2	863	34
+ddl_from_protobuf        	2	6066	133
+debezium_adapter_postgres	2	12034	326
+debtors_list             	2	2603	37
+go_lines_count           	2	612	24
+image_connections        	2	1802	53
+image_database           	2	1864	46
+image_packages           	2	2402	73
+monitor_service          	2	2631	27
+stack_exchange_postgres  	2	19924	429
+starter                  	2	17563	890
+sync_service             	2	689029	25873
+telegram_bonds           	2	417	14
+telegram_loki            	2	1460	43
+tin		               	2	694210	28922
+whatsapp_chatgpt         	2	425	12
 ```
 
 I wrote 610 thousand lines of code in 2 years, 
